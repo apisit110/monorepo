@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Node 16",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+        "ES2022"
+    ],
+    "module": "commonjs",
+    "outDir": "../../apps/mylab-portal-service/dist",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}

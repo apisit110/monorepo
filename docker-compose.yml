@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  myapp-portal:
+    build:
+      context: apps/mylab-portal
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+  myapp-portal-service:
+    build:
+      context: apps/mylab-portal-service
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+      

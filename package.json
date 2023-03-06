@@ -10,16 +10,16 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "dev:portal": "turbo run dev --filter=mylab-portal*"
   },
   "devDependencies": {
     "eslint-config-custom": "*",
-    "prettier": "latest",
+    "prettier": "^2.8.4",
     "turbo": "latest"
   },
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {},
   "packageManager": "npm@8.19.2"
 }

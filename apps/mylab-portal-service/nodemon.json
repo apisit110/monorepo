@@ -1,0 +1,6 @@
+{
+  "ignore": [".git", "node_modules", "dist"],
+  "watch": ["./src", "../../packages/libs"],
+  "exec": "tsx ./src/index.ts",
+  "ext": "ts,js,json"
+}
