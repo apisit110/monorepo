@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     browser: true,
-    es2022: true
+    es2021: true
   },
   extends: ['standard'],
   parser: '@typescript-eslint/parser',

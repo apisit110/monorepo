@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     browser: true,
-    es2022: true
+    es2021: true
   },
   extends: ['eslint-config-standard', 'eslint-config-next'],
   parser: '@typescript-eslint/parser',
@@ -15,6 +15,7 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': ['error']
+    '@typescript-eslint/no-use-before-define': ['error'],
+    '@next/next/no-html-link-for-pages': 'off'
   }
 }
