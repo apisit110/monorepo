@@ -8,11 +8,14 @@ WORKDIR /home/node/app
 # Environment
 ENV CURRENT_CODE=001
 
-# Install app dependencies
+# Copy root package.json
 COPY --chown=node:node package.json ./
+COPY --chown=node:node ./public ./public
 
+# Install package
 RUN npm install --production
 
+# Copy app source
 COPY --chown=node:node ./.next ./.next
 
 EXPOSE 3000
