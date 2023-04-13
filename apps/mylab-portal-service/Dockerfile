@@ -1,20 +1,22 @@
-FROM node:18-alpine3.16
-
-# Create app directory
-USER node
+# 1st BUILD
+FROM node:18-alpine3.16 AS builder
 RUN mkdir -p /home/node/app
 WORKDIR /home/node/app
+COPY package.json ./package.json
+COPY turbo.json ./turbo.json
+COPY packages ./packages
+COPY apps/mylab-portal-service ./apps/mylab-portal-service
 
-# Environment
-ENV PORTAL_SERVICE_PORT=3001
+# 2nd INSTALL
+FROM node:18-alpine3.16 AS installer
+WORKDIR /home/node/app
+COPY --from=builder /home/node/app ./
+RUN npm install
+RUN npm run build:mylab-portal-service
 
-# Install app dependencies
-COPY --chown=node:node package.json ./
-
-RUN npm install --production
-
-COPY --chown=node:node ./dist ./dist
-
-EXPOSE 3001
-
+# 3rd RUN
+FROM node:18-alpine3.16 AS runner
+WORKDIR /home/node/app
+COPY --from=installer /home/node/app ./
+# COPY --from=installer /home/node/app/apps/mylab-portal ./
 CMD ["npm", "run", "start"]

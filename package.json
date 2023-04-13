@@ -7,11 +7,16 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
     "dev": "turbo run dev",
+    "dev:portal": "turbo run dev --filter=mylab-portal*",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "dev:portal": "turbo run dev --filter=mylab-portal*"
+    "build": "turbo run build",
+    "build:mylab-portal": "turbo build --filter=mylab-portal",
+    "build:mylab-portal-service": "turbo build --filter=mylab-portal-service",
+    "start": "turbo run start",
+    "clean": "rm -rf node_modules && rm -rf packages/eslint-config-custom/node_modules && rm -rf packages/libs/node_modules && rm -rf packages/ui/node_modules && rm -rf apps/mylab-portal/node_modules && rm -rf apps/mylab-portal/package-lock.json && rm -rf apps/mylab-portal-service/node_modules && rm -rf apps/mylab-portal-service/package-lock.json",
+    "clean-install": "rm -rf node_modules && rm -rf packages/eslint-config-custom/node_modules && rm -rf packages/libs/node_modules && rm -rf packages/ui/node_modules && rm -rf apps/mylab-portal/node_modules && rm -rf apps/mylab-portal/package-lock.json && rm -rf apps/mylab-portal-service/node_modules && rm -rf apps/mylab-portal-service/package-lock.json && npm install"
   },
   "devDependencies": {
     "eslint-config-custom": "*",
