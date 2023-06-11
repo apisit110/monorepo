@@ -1,0 +1,16 @@
+{
+  "name": "mylab-golang-service",
+  "version": "1.0.0",
+  "description": "```go // HOW TO DECLARE FUNCTION func myHandler(w http.ResponseWriter, r *http.Request) { \t// The := Short variable declaration can only be used inside functions \ttmp2 := \"world!\" \tfmt.Printf(\"TEST: %s %s\", tmp1, tmp2) } ``` > The := Short variable declaration can only be used inside functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "ignore": [".git", "node_modules", "dist"],
+  "watch": ["main.go", "./src", "../../packages/libs"],
+  "exec": "go run main.go",
+  "ext": "go,json",
+  "signal": "SIGTERM"
+}

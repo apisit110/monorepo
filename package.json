@@ -17,9 +17,9 @@
     "start": "turbo run start",
     "clean": "rm -rf node_modules && rm -rf packages/eslint-config-custom/node_modules && rm -rf packages/libs/node_modules && rm -rf packages/ui/node_modules && rm -rf apps/mylab-portal/node_modules && rm -rf apps/mylab-portal/package-lock.json && rm -rf apps/mylab-portal-service/node_modules && rm -rf apps/mylab-portal-service/package-lock.json",
     "clean-install": "rm -rf node_modules && rm -rf packages/eslint-config-custom/node_modules && rm -rf packages/libs/node_modules && rm -rf packages/ui/node_modules && rm -rf apps/mylab-portal/node_modules && rm -rf apps/mylab-portal/package-lock.json && rm -rf apps/mylab-portal-service/node_modules && rm -rf apps/mylab-portal-service/package-lock.json && npm install",
-    "dev:go": "go run ./apps/mylab-golang-service/demo1/index.go",
-    "build:go": "go build -o ./apps/mylab-golang-service/dist/ ./apps/mylab-golang-service/demo1/index.go",
-    "start:go": "./apps/mylab-golang-service/dist/index"
+    "dev:go": "turbo run dev --filter=mylab-golang*",
+    "build:go": "cd ./apps/mylab-golang-service && go build -o ./dist/ ./main.go",
+    "start:go": "./apps/mylab-golang-service/dist/main"
   },
   "devDependencies": {
     "eslint-config-custom": "*",

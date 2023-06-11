@@ -3,5 +3,8 @@
     "prettier.singleQuote": true,
     "prettier.jsxSingleQuote": true,
     "prettier.semi": false,
-    "prettier.trailingComma": "none"
+    "prettier.trailingComma": "none",
+    "gopls": {
+        "experimentalWorkspaceModule": true
+    }
 }
