@@ -20,8 +20,5 @@ services:
     env_file:
       - apps/mylab-portal-service/.env.docker
     ports:
-      - target: 3001
-        published: 3001
-        protocol: tcp
-        mode: host
-    restart: always
+      - "3001:3001"
+      
