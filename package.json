@@ -9,20 +9,14 @@
   "scripts": {
     "dev": "turbo run dev",
     "dev:portal": "turbo run dev --filter=mylab-portal*",
+    "test": "turbo run lint",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "build": "turbo run build",
-    "build:mylab-portal": "turbo build --filter=mylab-portal",
-    "build:mylab-portal-service": "turbo build --filter=mylab-portal-service",
-    "start": "turbo run start",
-    "clean": "rm -rf node_modules && rm -rf packages/eslint-config-custom/node_modules && rm -rf packages/libs/node_modules && rm -rf packages/ui/node_modules && rm -rf apps/mylab-portal/node_modules && rm -rf apps/mylab-portal/package-lock.json && rm -rf apps/mylab-portal-service/node_modules && rm -rf apps/mylab-portal-service/package-lock.json",
-    "clean-install": "rm -rf node_modules && rm -rf packages/eslint-config-custom/node_modules && rm -rf packages/libs/node_modules && rm -rf packages/ui/node_modules && rm -rf apps/mylab-portal/node_modules && rm -rf apps/mylab-portal/package-lock.json && rm -rf apps/mylab-portal-service/node_modules && rm -rf apps/mylab-portal-service/package-lock.json && npm install",
-    "dev:go": "turbo run dev --filter=mylab-golang*",
-    "build:go": "cd ./apps/mylab-golang-service && go build -o ./dist/ ./main.go",
-    "start:go": "./apps/mylab-golang-service/dist/main"
+    "dev:portal": "turbo run dev --filter=mylab-portal*"
   },
   "devDependencies": {
     "eslint-config-custom": "*",
+    "husky": "^8.0.0",
     "prettier": "^2.8.4",
     "turbo": "latest"
   },

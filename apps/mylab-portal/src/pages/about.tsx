@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import Menu from 'ui/components/Menu'
 import Button from 'ui/components/Buttons'
 

@@ -20,17 +20,17 @@ const createRequestLog =
         `${req.method} ` +
         `${req.originalUrl} ` +
         `${req.ip} ` +
-        `${req.headers['user-agent']} ` +
-        {
-          requestUID: res.locals.requestUID,
-          type: 'request',
-          method: req.method,
-          url: req.originalUrl,
-          request: {
-            headers: req.headers,
-            body: req.body
-          }
+        `${req.headers['user-agent']}`,
+      {
+        requestUID: res.locals.requestUID,
+        type: 'request',
+        method: req.method,
+        url: req.originalUrl,
+        request: {
+          headers: req.headers,
+          body: req.body
         }
+      }
     )
     next()
   }
@@ -49,20 +49,20 @@ const createResponseLog =
         `${req.method} ` +
         `${req.originalUrl} ` +
         `${res.statusCode} ` +
-        `${responseTime} ` +
-        {
-          requestUID,
-          type: 'response',
-          method: req.method,
-          url: req.originalUrl,
-          response: {
-            status: res.statusCode,
-            time: responseTime,
-            timeUnit: 'ms',
-            headers: res.getHeaders(),
-            body
-          }
+        `${responseTime}ms`,
+      {
+        requestUID,
+        type: 'response',
+        method: req.method,
+        url: req.originalUrl,
+        response: {
+          status: res.statusCode,
+          time: responseTime,
+          timeUnit: 'ms',
+          headers: res.getHeaders(),
+          body
         }
+      }
     )
     next()
   }
