@@ -23,7 +23,7 @@
     "@types/node": "^18.14.6",
     "esbuild": "^0.17.11",
     "esbuild-node-tsc": "^2.0.5",
-    "nodemon": "^2.0.21",
+    "nodemon": "^3.0.1",
     "tsconfig": "*",
     "tsx": "^3.12.3",
     "typescript": "^4.9.5"
