@@ -11,5 +11,9 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {},
-  ignorePatterns: []
+  ignorePatterns: [
+    'node_modules',
+    'dist',
+    '.turbo'
+  ]
 }

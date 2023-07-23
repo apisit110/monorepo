@@ -1,22 +1,22 @@
 version: '3.7'
 services:
-  myapp-portal:
-    container_name: mylab-portal
-    build: 
-      context: .
-      dockerfile: ./apps/mylab-portal/Dockerfile
-    env_file:
-      - apps/mylab-portal/.env.docker
-    ports:
-      - target: 3000
-        published: 3000
-        protocol: tcp
-        mode: host
-    restart: always
+  # myapp-portal:
+  #   container_name: mylab-portal
+  #   build: 
+  #     context: .
+  #     dockerfile: ./apps/mylab-portal/Dockerfile
+  #   env_file:
+  #     - apps/mylab-portal/.env.docker
+  #   ports:
+  #     - target: 3000
+  #       published: 3000
+  #       protocol: tcp
+  #       mode: host
+  #   restart: always
   myapp-portal-service:
     build:
       context: .
-      dockerfile: apps/mylab-portal-service/Dockerfile
+      dockerfile: ./apps/mylab-portal-service/Dockerfile
     env_file:
       - apps/mylab-portal-service/.env.docker
     ports:

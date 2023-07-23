@@ -9,19 +9,27 @@
   "scripts": {
     "dev": "turbo run dev",
     "dev:portal": "turbo run dev --filter=mylab-portal*",
+    "dev:go": "turbo run dev --filter=mylab-golang-service",
+    "dev:batch": "turbo run dev --filter=mylab-batch",
+    "dev:queue": "turbo run dev --filter=mylab-queue-processor",
+    "dev:batch:queue": "turbo run dev --filter=mylab-batch --filter=mylab-queue-processor",
     "test": "turbo run lint",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "dev:portal": "turbo run dev --filter=mylab-portal*"
+    "build-clean": "rm -r *dist",
+    "clean": "rm -rf node_modules && rm -rf apps/mylab-batch/node_modules && rm -rf apps/mylab-golang-service/node_modules && rm -rf apps/mylab-portal/node_modules && rm -rf apps/mylab-portal-service/node_modules && rm -rf apps/mylab-queue-processor/node_modules && rm -rf packages/eslint-config-custom/node_modules && rm -rf packages/libs/node_modules && rm -rf packages/ui/node_modules",
+    "clean-install": "rm -rf node_modules && rm -rf apps/mylab-batch/node_modules && rm -rf apps/mylab-golang-service/node_modules && rm -rf apps/mylab-portal/node_modules && rm -rf apps/mylab-portal-service/node_modules && rm -rf apps/mylab-queue-processor/node_modules && rm -rf packages/eslint-config-custom/node_modules && rm -rf packages/libs/node_modules && rm -rf packages/ui/node_modules && yarn install"
   },
   "devDependencies": {
     "eslint-config-custom": "*",
     "husky": "^8.0.0",
-    "prettier": "^2.8.4",
-    "turbo": "latest"
+    "prettier": "^2.8.4"
   },
   "engines": {
     "node": ">=14.0.0"
   },
-  "packageManager": "npm@8.19.2"
+  "packageManager": "npm@8.19.2",
+  "dependencies": {
+    "turbo": "^1.10.9"
+  }
 }
