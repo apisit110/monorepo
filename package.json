@@ -22,14 +22,14 @@
   },
   "devDependencies": {
     "eslint-config-custom": "*",
-    "husky": "^8.0.0",
-    "prettier": "^2.8.4"
+    "husky": "^9.0.11",
+    "prettier": "^3.2.5"
   },
   "engines": {
     "node": ">=14.0.0"
   },
   "packageManager": "npm@8.19.2",
   "dependencies": {
-    "turbo": "^1.10.9"
+    "turbo": "^1.13.2"
   }
 }
