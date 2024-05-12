@@ -1,41 +1,56 @@
-FROM node:18-alpine AS base
- 
-FROM base AS builder
-# RUN apk add --no-cache libc6-compat
-# RUN apk update
-WORKDIR /app
+ARG NODE_VERSION=18-alpine3.16
+
+# Alpine image
+FROM node:${NODE_VERSION} AS alpine
+RUN apk add --no-cache libc6-compat
+RUN apk update
+
+# Setup turbo on the alpine base
+FROM alpine AS base
 RUN yarn global add turbo
+
+# Prune projects
+FROM base AS pruner
+WORKDIR /app
 COPY . .
-RUN turbo prune --scope mylab-portal --docker
-
-# Add lockfile and package.json's of isolated subworkspace
-FROM base AS installer
-# RUN apk add --no-cache libc6-compat
-# RUN apk update
-WORKDIR /app
-
- # First install the dependencies (as they change less often)
-COPY .gitignore .gitignore
-COPY --from=builder /app/out/json/ .
-COPY --from=builder /app/out/package-lock.json ./package-lock.json
-RUN npm install
-
-# Build the project
-COPY --from=builder /app/out/full/ .
-RUN yarn turbo run build --filter=mylab-portal
-
-FROM base AS runner
-WORKDIR /app
+RUN turbo prune --scope=mylab-portal --docker
  
-# Don't run production as root
+# Build the project
+FROM base AS builder
+WORKDIR /app
+# Copy lockfile and package.json's of isolated subworkspace
+COPY --from=pruner /app/out/json/ .
+COPY --from=pruner /app/out/package-lock.json ./package-lock.json
+
+# # see https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mounttypecache
+# RUN \
+#   --mount=type=cache,target=/usr/local/share/.cache/yarn/v6,sharing=locked \
+#   yarn --prefer-offline --frozen-lockfile
+RUN yarn install
+
+COPY --from=pruner /app/out/full/ .
+RUN turbo build --filter=mylab-portal
+# RUN prune ...
+RUN rm -rf ./**/*/src
+
+# Final image
+FROM base AS runner
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
-
-COPY --from=installer --chown=nextjs:nodejs /app .
+WORKDIR /app
+COPY --from=builder --chown=nextjs:nodejs /app .
 WORKDIR /app/apps/mylab-portal
-CMD ["yarn", "start"]
+# COPY --from=builder --chown=nodejs:nodejs /app/apps/mylab-portal .
+
+ARG PORT=3000
+# ENV PORTAL_SERVICE_PORT=${PORT}
+EXPOSE ${PORT}
+
+CMD yarn start
 
 # docker build -t mylab-portal:0.0.1 -f apps/mylab-portal/Dockerfile .
-# docker run --rm -it mylab-portal:0.0.1 sh
-# docker run --rm -d -p 3000:3000 mylab-portal:0.0.1
+# docker run --rm -d --name mylab-portal -p 3000:3000 mylab-portal:0.0.1
+# docker run --rm -it --name mylab-portal -p 3000:3000 mylab-portal:0.0.1 sh
+# docker logs -f mylab-portal
+# docker rm -f mylab-portal
