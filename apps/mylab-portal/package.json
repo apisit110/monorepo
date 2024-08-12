@@ -14,14 +14,13 @@
     "@types/react-dom": "18.0.11",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
-    "next": "13.2.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "4.9.5",
-    "ui": "*",
-    "tsconfig": "*"
+    "next": "^14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsconfig": "*",
+    "ui": "*"
   },
   "devDependencies": {
-    "tsconfig": "*"
+    "typescript": "^5.5.4"
   }
 }

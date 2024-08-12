@@ -2,13 +2,11 @@
   "name": "monorepo",
   "version": "0.0.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "scripts": {
     "dev": "turbo run dev",
-    "dev:portal": "turbo run dev --filter=mylab-portal*",
+    "dev:portal": "turbo run dev --filter=mylab-portal",
+    "dev:portal-service": "turbo run dev --filter=mylab-portal-service",
+    "dev:op": "turbo run dev --filter=mylab-portal*",
     "dev:go": "turbo run dev --filter=mylab-golang-service",
     "dev:batch": "turbo run dev --filter=mylab-batch",
     "dev:queue": "turbo run dev --filter=mylab-queue-processor",
@@ -17,19 +15,18 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "build-clean": "rm -r *dist",
-    "clean": "rm -rf node_modules && rm -rf apps/mylab-batch/node_modules && rm -rf apps/mylab-golang-service/node_modules && rm -rf apps/mylab-portal/node_modules && rm -rf apps/mylab-portal-service/node_modules && rm -rf apps/mylab-queue-processor/node_modules && rm -rf packages/eslint-config-custom/node_modules && rm -rf packages/libs/node_modules && rm -rf packages/ui/node_modules",
-    "clean-install": "rm -rf node_modules && rm -rf apps/mylab-batch/node_modules && rm -rf apps/mylab-golang-service/node_modules && rm -rf apps/mylab-portal/node_modules && rm -rf apps/mylab-portal-service/node_modules && rm -rf apps/mylab-queue-processor/node_modules && rm -rf packages/eslint-config-custom/node_modules && rm -rf packages/libs/node_modules && rm -rf packages/ui/node_modules && yarn install"
+    "clean": "rm -rf node_modules && rm -rf apps/mylab-portal/node_modules && rm -rf apps/mylab-portal-service/node_modules && rm -rf apps/mylab-batch/node_modules && rm -rf apps/mylab-queue-processor/node_modules && rm -rf apps/mylab-golang-service/node_modules && rm -rf packages/libs/node_modules && rm -rf packages/ui/node_modules && rm -rf packages/eslint-config-custom/node_modules",
+    "clean-install": "rm -rf node_modules && rm -rf apps/mylab-portal/node_modules && rm -rf apps/mylab-portal-service/node_modules && rm -rf apps/mylab-batch/node_modules && rm -rf apps/mylab-queue-processor/node_modules && rm -rf apps/mylab-golang-service/node_modules && rm -rf packages/libs/node_modules && rm -rf packages/ui/node_modules && rm -rf packages/eslint-config-custom/node_modules && npm install",
+    "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
     "eslint-config-custom": "*",
     "husky": "^9.0.11",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "turbo": "^2.0.12"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=20.16.0"
   },
-  "packageManager": "npm@8.19.2",
-  "dependencies": {
-    "turbo": "^1.13.2"
-  }
+  "packageManager": "pnpm@9.7.0"
 }
