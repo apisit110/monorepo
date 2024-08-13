@@ -21,7 +21,7 @@
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/node": "^18.14.6",
-    "esbuild": "^0.17.11",
+    "esbuild": "^0.23.0",
     "esbuild-node-tsc": "^2.0.5",
     "nodemon": "^3.1.4",
     "tsconfig": "*",
