@@ -1,4 +1,4 @@
-import { test1Queue } from '@lab/libs/helpers/queue'
+import { test1Queue } from '../../../helpers/queue'
 
 import testQueueService from './service'
 

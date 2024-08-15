@@ -2,7 +2,8 @@ module.exports = {
   esbuild: {
     outdir: 'dist',
     bundle: true,
-    minify: false
+    minify: false,
+    target: 'es2022'
   },
   prebuild: async () => {
     console.log("prebuild")
