@@ -1,4 +1,4 @@
-import 'libs/helpers/dotenv'
+import '@lab/libs/helpers/dotenv'
 import * as queues from './queue'
 
 queues.workerQueue()

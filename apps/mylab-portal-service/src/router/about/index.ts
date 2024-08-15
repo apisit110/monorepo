@@ -1,6 +1,6 @@
 import express from 'express'
-// import aboutController from 'libs/controllers/about.controller'
-// import testController from 'libs/controllers/test.controller'
+// import aboutController from '@lab/libs/controllers/about.controller'
+// import testController from '@lab/libs/controllers/test.controller'
 
 const router = express.Router()
 

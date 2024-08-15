@@ -1,8 +1,8 @@
-import cron from 'node-cron'
+import * as cron from 'node-cron'
 
-import 'libs/helpers/dotenv'
-import { reportEndOfDay } from 'libs/utils/reports/internal/eod'
-import { test } from 'libs/utils/test/test'
+import '@lab/libs/helpers/dotenv'
+import { reportEndOfDay } from '@lab/libs/utils/reports/internal/eod'
+import { test } from '@lab/libs/utils/test/test'
 
 const TIMEZONE = process.env.TZ as string
 

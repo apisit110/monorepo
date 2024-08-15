@@ -10,7 +10,13 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: ['@typescript-eslint'],
-  rules: {},
+  rules: {
+    'space-before-function-paren': ['error', {
+      anonymous: 'always',
+      named: 'never',
+      asyncArrow: 'always'
+    }]
+  },
   ignorePatterns: [
     'node_modules',
     'dist',

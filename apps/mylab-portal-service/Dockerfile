@@ -1,4 +1,4 @@
-ARG NODE_VERSION=18-alpine3.16
+ARG NODE_VERSION=20.16-alpine3.19
 
 # Alpine image
 FROM node:${NODE_VERSION} AS alpine
@@ -17,37 +17,25 @@ RUN turbo prune --scope=mylab-portal-service --docker
 
 # Build the project
 FROM base AS builder
-WORKDIR /app
-# Copy lockfile and package.json's of isolated subworkspace
-COPY --from=pruner /app/out/json/ .
-COPY --from=pruner /app/out/package-lock.json ./package-lock.json
+RUN npm install -g pnpm
 
-# # see https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mounttypecache
-# RUN \
-#   --mount=type=cache,target=/usr/local/share/.cache/yarn/v6,sharing=locked \
-#   yarn --prefer-offline --frozen-lockfile
-RUN yarn install
+WORKDIR /app
+COPY --from=pruner /app/out/json/ .
+RUN pnpm install --frozen-lockfile
 
 COPY --from=pruner /app/out/full/ .
 RUN turbo build --filter=mylab-portal-service
-# RUN prune ...
-RUN rm -rf ./**/*/src
+RUN pnpm deploy --filter=mylab-portal-service --prod /home/node/mylab-portal-service
 
 # Final image
 FROM base AS runner
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nodejs
-USER nodejs
+COPY --from=builder /home/node/mylab-portal-service /app
 WORKDIR /app
-# COPY --from=builder --chown=nodejs:nodejs /app .
-# WORKDIR /app/apps/mylab-portal-service
-COPY --from=builder --chown=nodejs:nodejs /app/apps/mylab-portal-service .
 
 ARG PORT=3001
 ENV PORTAL_SERVICE_PORT=${PORT}
 EXPOSE ${PORT}
-
-CMD yarn start
+CMD ["npm", "start"]
 
 # docker build -t mylab-portal-service:0.0.1 -f apps/mylab-portal-service/Dockerfile .
 # docker run --rm -d --name mylab-portal-service -p 3001:3001 mylab-portal-service:0.0.1

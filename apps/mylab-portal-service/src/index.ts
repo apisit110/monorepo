@@ -1,8 +1,8 @@
 import express from 'express'
-import 'libs/helpers/dotenv'
+import '@lab/libs/helpers/dotenv'
 
 import router from './router'
-import logController from 'libs/controllers/log.controller'
+import logController from '@lab/libs/controllers/log.controller'
 
 const app = express()
 const PORT = Number(process.env.PORTAL_SERVICE_PORT)

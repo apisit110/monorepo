@@ -1,4 +1,4 @@
 module.exports = {
   // root: true,
-  extends: ['eslint-config-custom/eslint-next']
+  extends: ['@lab/eslint-config-custom/eslint-node']
 }

@@ -1,4 +1,4 @@
-import { test1Queue, test2Queue } from 'libs/helpers/queue/index'
+import { test1Queue, test2Queue } from '@lab/libs/helpers/queue/index'
 
 export const test = async () => {
   const test1QueueData = {}

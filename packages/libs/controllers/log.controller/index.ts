@@ -4,7 +4,7 @@ import dayjs, { Dayjs } from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import tz from 'dayjs/plugin/timezone'
 
-import winston from 'libs/helpers/winston'
+import winston from '../../helpers/winston'
 
 dayjs.extend(utc)
 dayjs.extend(tz)

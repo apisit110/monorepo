@@ -1,6 +1,6 @@
 import Queue, { QueueOptions } from 'bull'
 
-import queueNameMaster from 'libs/constants/masters/queueNameMaster.json'
+import queueNameMaster from '@lab/libs/constants/masters/queueNameMaster.json'
 
 const REDIS_HOST = process.env.REDIS_HOST as string
 const REDIS_PORT = Number(process.env.REDIS_PORT)
