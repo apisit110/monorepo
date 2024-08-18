@@ -1,4 +1,4 @@
-ARG NODE_VERSION=18-alpine3.16
+ARG NODE_VERSION=20.16-alpine3.19
 
 # Alpine image
 FROM node:${NODE_VERSION} AS alpine
@@ -7,47 +7,39 @@ RUN apk update
 
 # Setup turbo on the alpine base
 FROM alpine AS base
-RUN yarn global add turbo
+RUN npm install -g turbo
 
 # Prune projects
 FROM base AS pruner
 WORKDIR /app
 COPY . .
 RUN turbo prune --scope=mylab-portal --docker
- 
+
 # Build the project
 FROM base AS builder
-WORKDIR /app
-# Copy lockfile and package.json's of isolated subworkspace
-COPY --from=pruner /app/out/json/ .
-COPY --from=pruner /app/out/package-lock.json ./package-lock.json
+RUN npm install -g pnpm
 
-# # see https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/reference.md#run---mounttypecache
-# RUN \
-#   --mount=type=cache,target=/usr/local/share/.cache/yarn/v6,sharing=locked \
-#   yarn --prefer-offline --frozen-lockfile
-RUN yarn install
+WORKDIR /app
+COPY --from=pruner /app/out/json/ .
+RUN pnpm install --frozen-lockfile
+
+# ENV PNPM_HOME="/pnpm"
+# ENV PATH="$PNPM_HOME:$PATH"
+# RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 COPY --from=pruner /app/out/full/ .
 RUN turbo build --filter=mylab-portal
-# RUN prune ...
-RUN rm -rf ./**/*/src
+RUN pnpm deploy --filter=mylab-portal --prod /home/node/mylab-portal
 
 # Final image
 FROM base AS runner
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-USER nextjs
+COPY --from=builder /home/node/mylab-portal /app
 WORKDIR /app
-COPY --from=builder --chown=nextjs:nodejs /app .
-WORKDIR /app/apps/mylab-portal
-# COPY --from=builder --chown=nodejs:nodejs /app/apps/mylab-portal .
 
-ARG PORT=3000
-# ENV PORTAL_SERVICE_PORT=${PORT}
+ARG PORT=3001
+ENV PORTAL_SERVICE_PORT=${PORT}
 EXPOSE ${PORT}
-
-CMD yarn start
+CMD ["npm", "run", "start"]
 
 # docker build -t mylab-portal:0.0.1 -f apps/mylab-portal/Dockerfile .
 # docker run --rm -d --name mylab-portal -p 3000:3000 mylab-portal:0.0.1

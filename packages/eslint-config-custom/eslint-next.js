@@ -16,7 +16,9 @@ module.exports = {
   rules: {
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
-    '@next/next/no-html-link-for-pages': 'off'
+    '@next/next/no-html-link-for-pages': 'off',
+    semi: ['error', 'always'],
+    indent: ['error', 2]
   },
   ignorePatterns: [
     'node_modules',
