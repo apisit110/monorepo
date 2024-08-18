@@ -36,13 +36,13 @@ FROM base AS runner
 COPY --from=builder /home/node/mylab-batch /app
 WORKDIR /app
 
-ARG PORT=3001
-ENV PORTAL_SERVICE_PORT=${PORT}
-EXPOSE ${PORT}
+# ARG PORT=3001
+# ENV PORTAL_SERVICE_PORT=${PORT}
+# EXPOSE ${PORT}
 CMD ["npm", "run", "start"]
 
 # docker build -t mylab-batch:0.0.1 -f apps/mylab-batch/Dockerfile .
-# docker run --rm -d --name mylab-batch -p 3001:3001 mylab-batch:0.0.1
-# docker run --rm -it --name mylab-batch -p 3001:3001 mylab-batch:0.0.1 sh
+# docker run --rm -d --name mylab-batch mylab-batch:0.0.1
+# docker run --rm -it --name mylab-batch mylab-batch:0.0.1 sh
 # docker logs -f mylab-batch
 # docker rm -f mylab-batch

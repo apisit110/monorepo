@@ -36,8 +36,8 @@ FROM base AS runner
 COPY --from=builder /home/node/mylab-portal /app
 WORKDIR /app
 
-ARG PORT=3001
-ENV PORTAL_SERVICE_PORT=${PORT}
+ARG PORT=3000
+# ENV PORTAL_SERVICE_PORT=${PORT}
 EXPOSE ${PORT}
 CMD ["npm", "run", "start"]
 
