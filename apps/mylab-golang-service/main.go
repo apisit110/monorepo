@@ -16,9 +16,9 @@ func main() {
 
 	helper.Init()
 
-	r := gin.Default()
-	r.Use(cors.Default())
-	r.GET("/", Controller.GetProduct)
-	r.POST("/add-product", Controller.AddProduct)
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	router := gin.Default()
+	router.Use(cors.Default())
+	router.GET("/", Controller.GetProduct)
+	router.POST("/add-product", Controller.AddProduct)
+	router.Run(":8081") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }

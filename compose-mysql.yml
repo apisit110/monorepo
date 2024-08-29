@@ -1,0 +1,10 @@
+services:
+  mysql-db:
+    image: mysql:9.0.1
+    environment:
+      - MYSQL_ROOT_PASSWORD=1qazZAQ!
+    ports:
+      - 3306:3306
+    restart: always
+
+# docker compose -f ./compose-mysql.yml up -d

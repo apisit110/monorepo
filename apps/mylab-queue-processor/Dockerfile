@@ -42,7 +42,7 @@ WORKDIR /app
 CMD ["npm", "run", "start"]
 
 # docker build -t mylab-queue-processor:0.0.1 -f apps/mylab-queue-processor/Dockerfile .
-# docker run --rm -d --name mylab-queue-processor mylab-queue-processor:0.0.1
-# docker run --rm -it --name mylab-queue-processor mylab-queue-processor:0.0.1 sh
+# docker run --rm -d --env-file ./packages/libs/.env --name mylab-queue-processor mylab-queue-processor:0.0.1
+# docker run --rm -it --env-file ./packages/libs/.env --name mylab-queue-processor mylab-queue-processor:0.0.1 sh
 # docker logs -f mylab-queue-processor
 # docker rm -f mylab-queue-processor
